@@ -17,6 +17,7 @@ fail2ban:
     - user: root
     - group: root
     - mode: '0644'
+    - follow_symlinks: True
     - require:
       - pkg: fail2ban
 
@@ -26,5 +27,6 @@ fail2ban:
     - user: root
     - group: root
     - mode: '0644'
+    - follow_symlinks: True
     - require:
       - pkg: fail2ban

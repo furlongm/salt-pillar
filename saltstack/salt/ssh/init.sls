@@ -9,6 +9,7 @@ openssh-server:
     - user: root
     - group: root
     - mode: '0644'
+    - follow_symlinks: True
     - require:
       - pkg: openssh-server
 

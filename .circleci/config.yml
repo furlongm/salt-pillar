@@ -3,14 +3,14 @@ version: 2.1
 jobs:
   lint-ansible:
     docker:
-      - image: ubuntu:22.04
+      - image: ubuntu:24.04
     steps:
       - checkout
       - run:
           name: ansible-lint
           command: |
             apt update
-            apt -y install build-essential python3-virtualenv git
+            DEBIAN_FRONTEND=noninteractive apt -y install build-essential python3-virtualenv git
             virtualenv ansible-lint
             . ansible-lint/bin/activate
             pip install ansible ansible-lint
@@ -18,40 +18,40 @@ jobs:
             ansible-lint *
   lint-puppet:
     docker:
-      - image: ubuntu:22.04
+      - image: ubuntu:24.04
     steps:
       - checkout
       - run:
           name: puppet-lint
           command: |
             apt update
-            apt -y install build-essential zlib1g-dev ruby ruby-dev
+            DEBIAN_FRONTEND=noninteractive apt -y install build-essential zlib1g-dev ruby ruby-dev
             gem install puppet-lint
             puppet-lint --fail-on-warnings --no-documentation-check puppet/modules
   lint-salt:
     docker:
-      - image: ubuntu:22.04
+      - image: ubuntu:24.04
     steps:
       - checkout
       - run:
           name: salt-lint
           command: |
             apt update
-            apt -y install build-essential python3-dev python3-virtualenv
+            DEBIAN_FRONTEND=noninteractive apt -y install build-essential python3-dev python3-virtualenv
             virtualenv salt-lint
             . salt-lint/bin/activate
             pip install salt-lint
             find saltstack -name "*.sls" -print0 | xargs -0 -n1 salt-lint
   lint-chef:
     docker:
-      - image: ubuntu:22.04
+      - image: ubuntu:24.04
     steps:
       - checkout
       - run:
           name: chef-lint
           command: |
             apt update
-            apt -y install build-essential zlib1g-dev ruby ruby-dev
+            DEBIAN_FRONTEND=noninteractive apt -y install build-essential zlib1g-dev ruby ruby-dev
             gem install foodcritic cookstyle
             foodcritic -t ~FC031 -t ~FC071 -t ~FC011 -t ~FC109 chef/cookbooks
             cookstyle chef
@@ -97,7 +97,7 @@ jobs:
             bash -x standalone-chef.sh -e furlongm@gmail.com -l
   ansible-ubuntu:
     docker:
-      - image: ubuntu:22.04
+      - image: ubuntu:24.04
     steps:
       - checkout
       - run:
@@ -108,7 +108,7 @@ jobs:
             bash -x standalone-ansible.sh -e furlongm@gmail.com -l
   puppet-ubuntu:
     docker:
-      - image: ubuntu:22.04
+      - image: ubuntu:24.04
     steps:
       - checkout
       - run:
@@ -119,7 +119,7 @@ jobs:
             bash -x standalone-puppet.sh -e furlongm@gmail.com -l
   salt-ubuntu:
     docker:
-      - image: ubuntu:22.04
+      - image: ubuntu:24.04
     steps:
       - checkout
       - run:
@@ -130,7 +130,7 @@ jobs:
             bash -x standalone-salt.sh -e furlongm@gmail.com -l
   chef-ubuntu:
     docker:
-      - image: ubuntu:22.04
+      - image: ubuntu:24.04
     steps:
       - checkout
       - run:
@@ -180,7 +180,7 @@ jobs:
             bash -x standalone-chef.sh -e furlongm@gmail.com -l
   ansible-opensuse:
     docker:
-      - image: opensuse/leap:15.5
+      - image: opensuse/leap:15.6
     steps:
       - checkout
       - run:
@@ -190,7 +190,7 @@ jobs:
             bash -x standalone-ansible.sh -e furlongm@gmail.com -l
   puppet-opensuse:
     docker:
-      - image: opensuse/leap:15.5
+      - image: opensuse/leap:15.6
     steps:
       - checkout
       - run:
@@ -200,7 +200,7 @@ jobs:
             bash -x standalone-puppet.sh -e furlongm@gmail.com -l
   salt-opensuse:
     docker:
-      - image: opensuse/leap:15.5
+      - image: opensuse/leap:15.6
     steps:
       - checkout
       - run:
@@ -210,7 +210,7 @@ jobs:
             bash -x standalone-salt.sh -e furlongm@gmail.com -l
   chef-opensuse:
     docker:
-      - image: opensuse/leap:15.5
+      - image: opensuse/leap:15.6
     steps:
       - checkout
       - run:
@@ -220,7 +220,7 @@ jobs:
             bash -x standalone-chef.sh -e furlongm@gmail.com -l
   ansible-fedora:
     docker:
-      - image: fedora:38
+      - image: fedora:40
     steps:
       - checkout
       - run:
@@ -230,7 +230,7 @@ jobs:
             bash -x standalone-ansible.sh -e furlongm@gmail.com -l
   puppet-fedora:
     docker:
-      - image: fedora:38
+      - image: fedora:40
     steps:
       - checkout
       - run:
@@ -240,7 +240,7 @@ jobs:
             bash -x standalone-puppet.sh -e furlongm@gmail.com -l
   salt-fedora:
     docker:
-      - image: fedora:38
+      - image: fedora:40
     steps:
       - checkout
       - run:
@@ -250,7 +250,7 @@ jobs:
             bash -x standalone-salt.sh -e furlongm@gmail.com -l
   chef-fedora:
     docker:
-      - image: fedora:38
+      - image: fedora:40
     steps:
       - checkout
       - run:

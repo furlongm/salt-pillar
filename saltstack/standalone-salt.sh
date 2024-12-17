@@ -29,7 +29,7 @@ install_deps() {
 }
 
 install_salt() {
-    curl -L http://bootstrap.saltproject.io | bash -s -- -X -d -x python3 || exit 1
+    curl -L https://github.com/saltstack/salt-bootstrap/releases/latest/download/bootstrap-salt.sh | bash -s -- -X -d -x python3 || exit 1
 }
 
 install_vim_syntax_highlighting() {

@@ -21,6 +21,7 @@ vim-data:
     - user: root
     - group: root
     - mode: '0644'
+    - follow_symlinks: True
 {% endif %}
 
 {% if grains['os_family'] == 'RedHat' %}
@@ -30,6 +31,7 @@ vim-data:
     - user: root
     - group: root
     - mode: '0644'
+    - follow_symlinks: True
 {% endif %}
 
 /etc/vim:
@@ -44,5 +46,6 @@ vim-data:
     - user: root
     - group: root
     - mode: '0644'
+    - follow_symlinks: True
     - require:
       - file: /etc/vim
